@@ -1,0 +1,9 @@
+FROM python:3.7
+
+RUN pip install bottle celery redis sqlalchemy psycopg2
+
+RUN mkdir /code
+ADD app /code/app
+
+CMD ["python", "/code/app/init_db.py"]
+CMD ["python", "/code/app/server.py"]

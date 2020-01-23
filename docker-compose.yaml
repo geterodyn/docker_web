@@ -1,0 +1,49 @@
+version: "3"
+services:
+
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:latest
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=mypass
+        ports:
+            - "5673:5672"
+
+    redis:
+        image: redis
+
+    worker:
+        image: sf-celery-worker:latest
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.worker
+        depends_on:
+            - rabbit
+            - redis
+        volumes:
+            - ./app:/usr/src/app
+    database:
+        image: postgres:9.6
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_DB=divide_service_db
+            - POSTGRES_USER=posgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./data:/var/lib/postgresql/data
+    web:
+        image: sf-web-hw:latest
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.web
+        volumes:
+            - ./app:/code/app
+        command: python /code/app/server.py
+        ports:
+            - "5005:5000"
+        depends_on:
+            - worker
+            - redis
+        
