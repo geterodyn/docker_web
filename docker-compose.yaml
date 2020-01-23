@@ -29,7 +29,7 @@ services:
             - "5432:5432"
         environment:
             - POSTGRES_DB=divide_service_db
-            - POSTGRES_USER=posgres
+            - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
         volumes:
             - ./data:/var/lib/postgresql/data
