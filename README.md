@@ -11,7 +11,8 @@ Prior to using this service on your host, you should have Docker installed.
 ## Getting the copy of this project
 `clone https://github.com/geterodyn/docker_web.git`
 ## Running the code
-```cd docker_web.git
+```
+cd docker_web.git
 docker-compose up -d
 ```
 That's it, you're awesome!
