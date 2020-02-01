@@ -5,7 +5,7 @@
 This services lets you to divide two integers and get result. If you too lazy to pick numbers, you can get division result of two random integers. Also you can check statistics of how much calculation tasks were performed, and which numbers were involved into operations more often
 
 # Instruction
-## Prerequisits
+## Prerequisites
 Prior to using this service on your host, you should have Docker installed.
 
 ## Getting the copy of this project
