@@ -31,14 +31,14 @@ After a while you're able to enter http://127.0.0.1:5005/ into your browser and 
      - `http :5005`
 
 - http://127.0.0.1:5005/divide/top/bottom outputs with JSON that contain following information:
-  - Numerator
-  - Denominator
+  - Numerator **top**
+  - Denominator **bottom**
   - Answer or notification message if answer is not in database
   - ID of job in Celery queue
   - Date and time of calculation
   * Examples:
-     -`curl 127.0.0.1:5005/divide/25/5`
-     -`http :5005/divide/63/17`
+     - `curl 127.0.0.1:5005/divide/25/5`
+     - `http :5005/divide/63/17`
 
 - http://127.0.0.1:5005/statistics outputs with JSON that contain following information:
   - number of operations made
