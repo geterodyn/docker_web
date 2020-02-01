@@ -3,9 +3,11 @@ from random import randint
 from bottle import route, run
 from db import DivisionResult
 from tasks import divide
-from init_db import engine
 
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+
+engine = create_engine('postgres://postgres:postgres@database:5432/divide_service_db')
 
 Session = sessionmaker(bind=engine)
 s = Session()
@@ -49,11 +51,14 @@ def statistics():
     for i in all_numbers:
         for j in i:
             d[j] += 1
-    max_count = max([x for x in d.values()])
-    most_frequent_nums = [str(k) for k,v in d.items() if v == max_count]
+    max_count = max(d.values())
+    if max_count == 1:
+        most_frequent_nums = 'Пока цифры не повторяются!'
+    else:
+        most_frequent_nums = ', '.join([str(k) for k,v in d.items() if v == max_count])
     return {
         'Количество вычислительных операций': ops_amount,
-        'Наиболее частые числа, участвующие в расчётах': ', '.join(most_frequent_nums),
+        'Наиболее частые числа, участвующие в расчётах': most_frequent_nums,
         'Количество вычислений с этими числами': max_count
     }
 

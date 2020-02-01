@@ -1,0 +1,6 @@
+FROM postgres:9.6
+ENV POSTGRES_DB divide_service_db
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD postgres
+ADD init_db.sh /docker-entrypoint-initdb.d/
+
